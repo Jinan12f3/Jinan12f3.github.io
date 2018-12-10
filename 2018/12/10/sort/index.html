@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定   插">
+<meta name="description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用排序算法及其python实现">
 <meta property="og:url" content="https://jinan12f3.github.io/2018/12/10/sort/index.html">
 <meta property="og:site_name" content="Jinan&#39;s Blog">
-<meta property="og:description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定   插">
+<meta property="og:description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T11:52:31.829Z">
+<meta property="og:updated_time" content="2018-12-10T12:15:53.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用排序算法及其python实现">
-<meta name="twitter:description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定   插">
+<meta name="twitter:description" content="排序方法 时间复杂度(平均) 时间复杂度(最坏) 时间复杂度(最好) 空间复杂度 稳定性     冒泡排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   鸡尾酒排序 $O(n^2)$ $O(n^2)$ $O(n)$ $O(1)$ 稳定   快速排序 $O(n\log_2n)$ $O(n^2)$ $O(n\log_2n)$ $O(n\log_2n)$ 不稳定">
 
 
 
@@ -299,7 +299,8 @@
       
 
       
-        <table>
+        <div class="table-container">
+<table>
 <thead>
 <tr>
 <th>排序方法</th>
@@ -345,7 +346,7 @@
 </tr>
 <tr>
 <td>希尔排序</td>
-<td style="text-align:center">$O(n^1.3)$</td>
+<td style="text-align:center">$O(n^{1.3})$</td>
 <td style="text-align:center">$O(n^2)$</td>
 <td style="text-align:center">$O(n)$</td>
 <td style="text-align:center">$O(1)$</td>
@@ -401,6 +402,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>*表示未在文中出现</strong></p>
 <hr>
 <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ol>
@@ -447,7 +449,7 @@
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ol>
 <li>设置两个变量i、j，排序开始的时候：i=0，j=N-1；</li>
 <li>以第一个数组元素作为关键数据，赋值给base，即base=A[0]；</li>
-<li>从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于key的值A[j]，将A[j]和A[i]互换；</li>
+<li>从j开始向前搜索，即由后开始向前搜索(j—)，找到第一个小于key的值A[j]，将A[j]和A[i]互换；</li>
 <li>从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于key的A[i]，将A[i]和A[j]互换；</li>
 <li>重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于base，4中A[i]不大于base的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i，j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</li>
 </ol>
@@ -838,7 +840,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.5/latest.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
