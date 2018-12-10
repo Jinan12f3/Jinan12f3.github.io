@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="List 列表 —— 有序的可重复序列，可切片索引方法: 从list的尾部添加元素，等价于a[len(a):] = [x]  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.append(x)  从list的尾部添加一序列元素（list），等价于a[len(a):] = L  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.extend(L)  在指定位置添加元素，如a.insert(0,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据结构及一些函数用法">
+<meta property="og:url" content="https://jinan12f3.github.io/2018/12/10/data strutures of py/index.html">
+<meta property="og:site_name" content="Jinan&#39;s Blog">
+<meta property="og:description" content="List 列表 —— 有序的可重复序列，可切片索引方法: 从list的尾部添加元素，等价于a[len(a):] = [x]  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.append(x)  从list的尾部添加一序列元素（list），等价于a[len(a):] = L  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.extend(L)  在指定位置添加元素，如a.insert(0,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-10T15:57:00.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python数据结构及一些函数用法">
+<meta name="twitter:description" content="List 列表 —— 有序的可重复序列，可切片索引方法: 从list的尾部添加元素，等价于a[len(a):] = [x]  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.append(x)  从list的尾部添加一序列元素（list），等价于a[len(a):] = L  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;l.extend(L)  在指定位置添加元素，如a.insert(0,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jinan12f3.github.io/2018/12/10/data strutures of py/">
+
+
+
+
+
+  <title>Python数据结构及一些函数用法 | Jinan's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Try to make everyday count.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/10/data strutures of py/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jinan Qiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python数据结构及一些函数用法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T23:57:11+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="List-列表-——-有序的可重复序列，可切片索引"><a href="#List-列表-——-有序的可重复序列，可切片索引" class="headerlink" title="List 列表 —— 有序的可重复序列，可切片索引"></a>List 列表 —— 有序的可重复序列，可切片索引</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法:"></a>方法:</h3><ol>
+<li>从list的尾部添加元素，等价于a[len(a):] = [x]</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.append(x)</strong></p>
+<ol>
+<li>从list的尾部添加一序列元素（list），等价于a[len(a):] = L</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.extend(L)</strong></p>
+<ol>
+<li>在指定位置添加元素，如a.insert(0, x)即在list头部添加元素，a.insert(len(a), x)或a.insert(-1, x)相当于a.append(x)</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.insert(i, x)</strong></p>
+<ol>
+<li>删除值为x的第一个元素，如果找不到x将返回error</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.remove(x)</strong></p>
+<ol>
+<li>弹出制定位置的元素并返回，如果没有指定索引a.pop()将删除并返回最后一个元素，i旁边的中括号代表参数可有可无，并不需要在方法中添加</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.pop([i])</strong></p>
+<ol>
+<li>返回列表中第一个值为x的索引值，如果找不到将返回error</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.index(x)</strong></p>
+<ol>
+<li>返回x在列表中出现的次数</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.count(x)</strong></p>
+<ol>
+<li>对原列表进行排序</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.sort(cmp=None, key=None, reverse=False)</strong></p>
+<ol>
+<li>反向列表中的元素</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.reverse()</strong></p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引:"></a>索引:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a]</span></span><br><span class="line">arr[<span class="number">0</span>]  <span class="comment"># 返回索引为0的值： 1</span></span><br><span class="line">arr[<span class="number">3</span>]  <span class="comment"># 返回索引为3的值： 4</span></span><br><span class="line">arr[<span class="number">-1</span>]  <span class="comment"># 返回倒数索引为1的值： 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b]</span></span><br><span class="line">arr[:<span class="number">3</span>]  <span class="comment"># 返回 [1, 2, 3]</span></span><br><span class="line">arr[:<span class="number">-1</span>]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line">arr[<span class="number">2</span>:<span class="number">5</span>]  <span class="comment"># 返回 [3, 4, 5]</span></span><br><span class="line">arr[:]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b:c]</span></span><br><span class="line">arr[::<span class="number">2</span>]  <span class="comment"># 返回 [1, 3, 5, 7, 9]</span></span><br><span class="line">arr[::<span class="number">-1</span>]  <span class="comment"># 返回 [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</span></span><br><span class="line">arr[<span class="number">1</span>::<span class="number">3</span>]  <span class="comment"># 返回 [2, 5, 8]</span></span><br><span class="line">arr[:<span class="number">-1</span>:<span class="number">-2</span>]  <span class="comment"># 返回 [9, 7, 5, 3, 1]</span></span><br></pre></td></tr></table></figure>
+<h4 id="列表复制"><a href="#列表复制" class="headerlink" title="列表复制"></a>列表复制</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">list_a = [[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋值 - 修改他们其中任意一个，另外一个中的任何值都会随之改变（其实只是生成了一个引用）</span></span><br><span class="line">list_b = list_a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浅拷贝 - 如果列表中的值是可变数据(列表、字典、函数、类等)，他只会复制一个引用</span></span><br><span class="line"><span class="comment"># 1.利用copy方法</span></span><br><span class="line">list_b = copy.copy(list_a)</span><br><span class="line">list_b = list_a.copy()  <span class="comment"># python3 available</span></span><br><span class="line"><span class="comment"># 2. 利用列表索引</span></span><br><span class="line">list_b = list_a[:]</span><br><span class="line"><span class="comment"># 3. 利用生成器</span></span><br><span class="line">list_b = [a <span class="keyword">for</span> a <span class="keyword">in</span> list_a]</span><br><span class="line"><span class="comment"># 4. 循环</span></span><br><span class="line">list_b = list()</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> list_a:</span><br><span class="line">    list_b.append(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝 - 速度慢，一般尽量避免深拷贝</span></span><br><span class="line">list_b = copy.deepcopy(list_a)</span><br></pre></td></tr></table></figure>
+<h4 id="List倒置的方法"><a href="#List倒置的方法" class="headerlink" title="List倒置的方法"></a>List倒置的方法</h4><ul>
+<li>a[::-1]</li>
+<li>a.reverse()</li>
+<li>reversed(a)</li>
+</ul>
+<hr>
+<h2 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。</p>
+<hr>
+<h2 id="Set-集合-无序的无重复序列，不可切片索引"><a href="#Set-集合-无序的无重复序列，不可切片索引" class="headerlink" title="Set 集合 - 无序的无重复序列，不可切片索引"></a>Set 集合 - 无序的无重复序列，不可切片索引</h2><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法:"></a>方法:</h3><ol>
+<li>添加元素</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.add(x)</strong></p>
+<ol>
+<li>删除元素(如果没有找到元素引发KeyError)</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.remove(x)</strong></p>
+<ol>
+<li>删除元素(如果找到元素，没有找到不会引发异常)</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.discard(x)</strong></p>
+<ol>
+<li>弹出元素(如果集合为空引发KeyError，不可加参数)</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.pop()</strong></p>
+<ol>
+<li>清空所有元素</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.clear()</strong></p>
+<ol>
+<li>更新元素 (t为iterable)</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.update(t)</strong>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s |= t&nbsp;&nbsp;&nbsp;&nbsp;返回set并加入t中的元素（并集）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.intersection_update(t)</strong>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s &amp;= t&nbsp;&nbsp;&nbsp;&nbsp;返回set但只保留同时存在于t中的元素（交集）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.difference_update(t)</strong>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s -= t&nbsp;&nbsp;&nbsp;&nbsp;返回删除t中同时存在的元素后的set（差集）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.symmetric_difference_update(t)</strong>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s ^= t&nbsp;&nbsp;&nbsp;&nbsp;返回存在于s或存在于t，但不同时存在的元素的集合（并集-交集）</p>
+<hr>
+<h2 id="Dict-字典"><a href="#Dict-字典" class="headerlink" title="Dict 字典"></a>Dict 字典</h2><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
+<li>删除字典内所有元素</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.clear()</strong></p>
+<ol>
+<li>返回一个字典的浅复制</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.copy()</strong></p>
+<ol>
+<li>创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.fromkeys(seq[, val])</strong></p>
+<ol>
+<li>返回指定键的值，如果值不在字典中返回default值</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.get(key, default=None)</strong></p>
+<ol>
+<li>如果键在字典dict里返回true，否则返回false</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.has_key(key)</strong></p>
+<ol>
+<li>以列表返回可遍历的(键, 值) 元组数组</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.items()</strong></p>
+<ol>
+<li>以列表返回一个字典所有的键</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.keys()</strong></p>
+<ol>
+<li>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.setdefault(key, default=None)</strong></p>
+<ol>
+<li>把字典d2的键/值对更新到dict里</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.update(d2)</strong></p>
+<ol>
+<li>以列表返回字典中的所有值</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.values()</strong></p>
+<ol>
+<li>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.pop(key[,default])</strong></p>
+<ol>
+<li>随机返回并删除字典中的一对键和值。</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.popitem()</strong></p>
+<hr>
+<h2 id="数据类型的互相转换"><a href="#数据类型的互相转换" class="headerlink" title="数据类型的互相转换"></a>数据类型的互相转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型间主要通过list来达到转换的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># list和set</span></span><br><span class="line"></span><br><span class="line">s = set(l)</span><br><span class="line"></span><br><span class="line">l = list(s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和tuple</span></span><br><span class="line"></span><br><span class="line">t = tuple(l)</span><br><span class="line"></span><br><span class="line">l = list(t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和dict</span></span><br><span class="line"></span><br><span class="line">d = dict(zip(l1, l2))</span><br><span class="line"></span><br><span class="line">l1 = list(d.keys())</span><br><span class="line"></span><br><span class="line">l2 = list(d.values())</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="内置函数sorted"><a href="#内置函数sorted" class="headerlink" title="内置函数sorted"></a>内置函数sorted</h2><hr>
+<h2 id="collections"><a href="#collections" class="headerlink" title="collections"></a>collections</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/10/sort/" rel="next" title="常用排序算法及其python实现">
+                <i class="fa fa-chevron-left"></i> 常用排序算法及其python实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c0de854e6c27d10"></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jinan Qiu</p>
+              <p class="site-description motion-element" itemprop="description">Records of everything occurs in my life about knowledge and technology. Basically using python.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#List-列表-——-有序的可重复序列，可切片索引"><span class="nav-number">1.</span> <span class="nav-text">List 列表 —— 有序的可重复序列，可切片索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">1.2.</span> <span class="nav-text">索引:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表复制"><span class="nav-number">1.2.1.</span> <span class="nav-text">列表复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List倒置的方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">List倒置的方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuple-元组"><span class="nav-number">2.</span> <span class="nav-text">Tuple 元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-集合-无序的无重复序列，不可切片索引"><span class="nav-number">3.</span> <span class="nav-text">Set 集合 - 无序的无重复序列，不可切片索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">3.1.</span> <span class="nav-text">方法:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dict-字典"><span class="nav-number">4.</span> <span class="nav-text">Dict 字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法："><span class="nav-number">4.1.</span> <span class="nav-text">方法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型的互相转换"><span class="nav-number">5.</span> <span class="nav-text">数据类型的互相转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数sorted"><span class="nav-number">6.</span> <span class="nav-text">内置函数sorted</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collections"><span class="nav-number">7.</span> <span class="nav-text">collections</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jinan Qiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
