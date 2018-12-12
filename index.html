@@ -232,6 +232,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/12/data_strutures_4py/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jinan Qiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/12/data_strutures_4py/" itemprop="url">Python数据结构及一些函数用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-12T16:53:59+08:00">
+                2018-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="List-列表-——-有序的可重复序列，可切片索引"><a href="#List-列表-——-有序的可重复序列，可切片索引" class="headerlink" title="List 列表 —— 有序的可重复序列，可切片索引"></a>List 列表 —— 有序的可重复序列，可切片索引</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol>
+<li>从list的尾部添加元素，等价于a[len(a):] = [x]<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.append(x)</strong><br><br></li>
+<li>从list的尾部添加一序列元素（list），等价于a[len(a):] = L<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.extend(L)</strong><br><br></li>
+<li>在指定位置添加元素，如a.insert(0, x)即在list头部添加元素，a.insert(len(a), x)或a.insert(-1, x)相当于a.append(x)<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.insert(i, x)</strong><br><br></li>
+<li>删除值为x的第一个元素，如果找不到x将返回error<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.remove(x)</strong><br><br></li>
+<li>弹出制定位置的元素并返回，如果没有指定索引a.pop()将删除并返回最后一个元素，i旁边的中括号代表参数可有可无，并不需要在方法中添加<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.pop([i])</strong><br><br></li>
+<li>返回列表中第一个值为x的索引值，如果找不到将返回error<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.index(x)</strong><br><br></li>
+<li>返回x在列表中出现的次数<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.count(x)</strong><br><br></li>
+<li>对原列表进行排序<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.sort(cmp=None, key=None, reverse=False)</strong><br><br></li>
+<li>反向列表中的元素<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.reverse()</strong><br><br></li>
+</ol>
+<h3 id="索引切片"><a href="#索引切片" class="headerlink" title="索引切片"></a>索引切片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a]</span></span><br><span class="line">arr[<span class="number">0</span>]  <span class="comment"># 返回索引为0的值： 1</span></span><br><span class="line">arr[<span class="number">3</span>]  <span class="comment"># 返回索引为3的值： 4</span></span><br><span class="line">arr[<span class="number">-1</span>]  <span class="comment"># 返回倒数索引为1的值： 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b]</span></span><br><span class="line">arr[:<span class="number">3</span>]  <span class="comment"># 返回 [1, 2, 3]</span></span><br><span class="line">arr[:<span class="number">-1</span>]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line">arr[<span class="number">2</span>:<span class="number">5</span>]  <span class="comment"># 返回 [3, 4, 5]</span></span><br><span class="line">arr[:]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b:c]</span></span><br><span class="line">arr[::<span class="number">2</span>]  <span class="comment"># 返回 [1, 3, 5, 7, 9]</span></span><br><span class="line">arr[::<span class="number">-1</span>]  <span class="comment"># 返回 [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</span></span><br><span class="line">arr[<span class="number">1</span>::<span class="number">3</span>]  <span class="comment"># 返回 [2, 5, 8]</span></span><br><span class="line">arr[:<span class="number">-1</span>:<span class="number">-2</span>]  <span class="comment"># 返回 [9, 7, 5, 3, 1]</span></span><br></pre></td></tr></table></figure>
+<h3 id="列表复制"><a href="#列表复制" class="headerlink" title="列表复制"></a>列表复制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">list_a = [[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋值 - 修改他们其中任意一个，另外一个中的任何值都会随之改变（其实只是生成了一个引用）</span></span><br><span class="line">list_b = list_a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浅拷贝 - 如果列表中的值是可变数据(列表、字典、函数、类等)，他只会复制一个引用</span></span><br><span class="line"><span class="comment"># 1.利用copy方法</span></span><br><span class="line">list_b = copy.copy(list_a)</span><br><span class="line">list_b = list_a.copy()  <span class="comment"># python3 available</span></span><br><span class="line"><span class="comment"># 2. 利用列表索引</span></span><br><span class="line">list_b = list_a[:]</span><br><span class="line"><span class="comment"># 3. 利用生成器</span></span><br><span class="line">list_b = [a <span class="keyword">for</span> a <span class="keyword">in</span> list_a]</span><br><span class="line"><span class="comment"># 4. 循环</span></span><br><span class="line">list_b = list()</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> list_a:</span><br><span class="line">    list_b.append(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝 - 速度慢，一般尽量避免深拷贝</span></span><br><span class="line">list_b = copy.deepcopy(list_a)</span><br></pre></td></tr></table></figure>
+<h3 id="List倒置的方法"><a href="#List倒置的方法" class="headerlink" title="List倒置的方法"></a>List倒置的方法</h3><ul>
+<li>a[::-1]</li>
+<li>a.reverse()</li>
+<li>reversed(a)</li>
+</ul>
+<hr>
+<h2 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。</p>
+<hr>
+<h2 id="Set-集合-——-无序的无重复序列，不可切片索引"><a href="#Set-集合-——-无序的无重复序列，不可切片索引" class="headerlink" title="Set 集合 —— 无序的无重复序列，不可切片索引"></a>Set 集合 —— 无序的无重复序列，不可切片索引</h2><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ol>
+<li>添加元素<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.add(x)</strong><br><br></li>
+<li>删除元素(如果没有找到元素引发KeyError)<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.remove(x)</strong><br><br></li>
+<li>删除元素(如果找到元素，没有找到不会引发异常)<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.discard(x)</strong><br><br></li>
+<li>弹出元素(如果集合为空引发KeyError，不可加参数)<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.pop()</strong><br><br></li>
+<li>清空所有元素<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.clear()</strong><br><br></li>
+<li>更新元素 (t为iterable)<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.update(t)</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;s |= t&nbsp;&nbsp;&nbsp;&nbsp;返回set并加入t中的元素（并集）<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.intersection_update(t)</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;s &amp;= t&nbsp;&nbsp;&nbsp;&nbsp;返回set但只保留同时存在于t中的元素（交集）<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.difference_update(t)</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;s -= t&nbsp;&nbsp;&nbsp;&nbsp;返回删除t中同时存在的元素后的set（差集）<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.symmetric_difference_update(t)</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;s ^= t&nbsp;&nbsp;&nbsp;&nbsp;返回存在于s或存在于t，但不同时存在的元素的集合（并集-交集）<br></li>
+</ol>
+<hr>
+<h2 id="Dict-字典"><a href="#Dict-字典" class="headerlink" title="Dict 字典"></a>Dict 字典</h2><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
+<li>删除字典内所有元素<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.clear()</strong><br><br></li>
+<li>返回一个字典的浅复制<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.copy()</strong><br><br></li>
+<li>创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.fromkeys(seq[, val])</strong><br><br></li>
+<li>返回指定键的值，如果值不在字典中返回default值<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.get(key, default=None)</strong><br><br></li>
+<li>如果键在字典dict里返回true，否则返回false<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.has_key(key)</strong><br><br></li>
+<li>以列表返回可遍历的(键, 值) 元组数组<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.items()</strong><br><br></li>
+<li>以列表返回一个字典所有的键<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.keys()</strong><br><br></li>
+<li>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.setdefault(key, default=None)</strong><br><br></li>
+<li>把字典d2的键/值对更新到dict里<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.update(d2)</strong><br><br></li>
+<li>以列表返回字典中的所有值<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.values()</strong><br><br></li>
+<li>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.pop(key[,default])</strong><br><br></li>
+<li>随机返回并删除字典中的一对键和值。<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.popitem()</strong><br><br></li>
+</ol>
+<hr>
+<h2 id="数据类型的互相转换"><a href="#数据类型的互相转换" class="headerlink" title="数据类型的互相转换"></a>数据类型的互相转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型间主要通过list来达到转换的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># list和set</span></span><br><span class="line"></span><br><span class="line">s = set(l)</span><br><span class="line"></span><br><span class="line">l = list(s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和tuple</span></span><br><span class="line"></span><br><span class="line">t = tuple(l)</span><br><span class="line"></span><br><span class="line">l = list(t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和dict</span></span><br><span class="line"></span><br><span class="line">d = dict(zip(l1, l2))</span><br><span class="line"></span><br><span class="line">l1 = list(d.keys())</span><br><span class="line"></span><br><span class="line">l2 = list(d.values())</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="内置函数sorted"><a href="#内置函数sorted" class="headerlink" title="内置函数sorted"></a>内置函数sorted</h2><hr>
+<h2 id="collections"><a href="#collections" class="headerlink" title="collections"></a>collections</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/11/huawei_pq/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -348,255 +515,6 @@
 </li>
 </ol>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/10/data strutures of py/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jinan Qiu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinan's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/10/data strutures of py/" itemprop="url">Python数据结构及一些函数用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T23:57:11+08:00">
-                2018-12-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="List-列表-——-有序的可重复序列，可切片索引"><a href="#List-列表-——-有序的可重复序列，可切片索引" class="headerlink" title="List 列表 —— 有序的可重复序列，可切片索引"></a>List 列表 —— 有序的可重复序列，可切片索引</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法:"></a>方法:</h3><ol>
-<li>从list的尾部添加元素，等价于a[len(a):] = [x]</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.append(x)</strong></p>
-<ol>
-<li>从list的尾部添加一序列元素（list），等价于a[len(a):] = L</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.extend(L)</strong></p>
-<ol>
-<li>在指定位置添加元素，如a.insert(0, x)即在list头部添加元素，a.insert(len(a), x)或a.insert(-1, x)相当于a.append(x)</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.insert(i, x)</strong></p>
-<ol>
-<li>删除值为x的第一个元素，如果找不到x将返回error</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.remove(x)</strong></p>
-<ol>
-<li>弹出制定位置的元素并返回，如果没有指定索引a.pop()将删除并返回最后一个元素，i旁边的中括号代表参数可有可无，并不需要在方法中添加</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.pop([i])</strong></p>
-<ol>
-<li>返回列表中第一个值为x的索引值，如果找不到将返回error</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.index(x)</strong></p>
-<ol>
-<li>返回x在列表中出现的次数</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.count(x)</strong></p>
-<ol>
-<li>对原列表进行排序</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.sort(cmp=None, key=None, reverse=False)</strong></p>
-<ol>
-<li>反向列表中的元素</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>l.reverse()</strong></p>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引:"></a>索引:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a]</span></span><br><span class="line">arr[<span class="number">0</span>]  <span class="comment"># 返回索引为0的值： 1</span></span><br><span class="line">arr[<span class="number">3</span>]  <span class="comment"># 返回索引为3的值： 4</span></span><br><span class="line">arr[<span class="number">-1</span>]  <span class="comment"># 返回倒数索引为1的值： 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b]</span></span><br><span class="line">arr[:<span class="number">3</span>]  <span class="comment"># 返回 [1, 2, 3]</span></span><br><span class="line">arr[:<span class="number">-1</span>]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line">arr[<span class="number">2</span>:<span class="number">5</span>]  <span class="comment"># 返回 [3, 4, 5]</span></span><br><span class="line">arr[:]  <span class="comment"># 返回 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># arr[a:b:c]</span></span><br><span class="line">arr[::<span class="number">2</span>]  <span class="comment"># 返回 [1, 3, 5, 7, 9]</span></span><br><span class="line">arr[::<span class="number">-1</span>]  <span class="comment"># 返回 [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</span></span><br><span class="line">arr[<span class="number">1</span>::<span class="number">3</span>]  <span class="comment"># 返回 [2, 5, 8]</span></span><br><span class="line">arr[:<span class="number">-1</span>:<span class="number">-2</span>]  <span class="comment"># 返回 [9, 7, 5, 3, 1]</span></span><br></pre></td></tr></table></figure>
-<h3 id="列表复制"><a href="#列表复制" class="headerlink" title="列表复制"></a>列表复制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">list_a = [[<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋值 - 修改他们其中任意一个，另外一个中的任何值都会随之改变（其实只是生成了一个引用）</span></span><br><span class="line">list_b = list_a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浅拷贝 - 如果列表中的值是可变数据(列表、字典、函数、类等)，他只会复制一个引用</span></span><br><span class="line"><span class="comment"># 1.利用copy方法</span></span><br><span class="line">list_b = copy.copy(list_a)</span><br><span class="line">list_b = list_a.copy()  <span class="comment"># python3 available</span></span><br><span class="line"><span class="comment"># 2. 利用列表索引</span></span><br><span class="line">list_b = list_a[:]</span><br><span class="line"><span class="comment"># 3. 利用生成器</span></span><br><span class="line">list_b = [a <span class="keyword">for</span> a <span class="keyword">in</span> list_a]</span><br><span class="line"><span class="comment"># 4. 循环</span></span><br><span class="line">list_b = list()</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> list_a:</span><br><span class="line">    list_b.append(a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝 - 速度慢，一般尽量避免深拷贝</span></span><br><span class="line">list_b = copy.deepcopy(list_a)</span><br></pre></td></tr></table></figure>
-<h3 id="List倒置的方法"><a href="#List倒置的方法" class="headerlink" title="List倒置的方法"></a>List倒置的方法</h3><ul>
-<li>a[::-1]</li>
-<li>a.reverse()</li>
-<li>reversed(a)</li>
-</ul>
-<hr>
-<h2 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple 元组"></a>Tuple 元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。</p>
-<hr>
-<h2 id="Set-集合-无序的无重复序列，不可切片索引"><a href="#Set-集合-无序的无重复序列，不可切片索引" class="headerlink" title="Set 集合 - 无序的无重复序列，不可切片索引"></a>Set 集合 - 无序的无重复序列，不可切片索引</h2><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法:"></a>方法:</h3><ol>
-<li>添加元素</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.add(x)</strong></p>
-<ol>
-<li>删除元素(如果没有找到元素引发KeyError)</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.remove(x)</strong></p>
-<ol>
-<li>删除元素(如果找到元素，没有找到不会引发异常)</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.discard(x)</strong></p>
-<ol>
-<li>弹出元素(如果集合为空引发KeyError，不可加参数)</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.pop()</strong></p>
-<ol>
-<li>清空所有元素</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.clear()</strong></p>
-<ol>
-<li>更新元素 (t为iterable)</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.update(t)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s |= t&nbsp;&nbsp;&nbsp;&nbsp;返回set并加入t中的元素（并集）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.intersection_update(t)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s &amp;= t&nbsp;&nbsp;&nbsp;&nbsp;返回set但只保留同时存在于t中的元素（交集）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.difference_update(t)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s -= t&nbsp;&nbsp;&nbsp;&nbsp;返回删除t中同时存在的元素后的set（差集）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>s.symmetric_difference_update(t)</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;&nbsp;&nbsp;&nbsp;s ^= t&nbsp;&nbsp;&nbsp;&nbsp;返回存在于s或存在于t，但不同时存在的元素的集合（并集-交集）</p>
-<hr>
-<h2 id="Dict-字典"><a href="#Dict-字典" class="headerlink" title="Dict 字典"></a>Dict 字典</h2><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
-<li>删除字典内所有元素</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.clear()</strong></p>
-<ol>
-<li>返回一个字典的浅复制</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.copy()</strong></p>
-<ol>
-<li>创建一个新字典，以序列 seq 中元素做字典的键，val 为字典所有键对应的初始值</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.fromkeys(seq[, val])</strong></p>
-<ol>
-<li>返回指定键的值，如果值不在字典中返回default值</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.get(key, default=None)</strong></p>
-<ol>
-<li>如果键在字典dict里返回true，否则返回false</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.has_key(key)</strong></p>
-<ol>
-<li>以列表返回可遍历的(键, 值) 元组数组</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.items()</strong></p>
-<ol>
-<li>以列表返回一个字典所有的键</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.keys()</strong></p>
-<ol>
-<li>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.setdefault(key, default=None)</strong></p>
-<ol>
-<li>把字典d2的键/值对更新到dict里</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.update(d2)</strong></p>
-<ol>
-<li>以列表返回字典中的所有值</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.values()</strong></p>
-<ol>
-<li>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.pop(key[,default])</strong></p>
-<ol>
-<li>随机返回并删除字典中的一对键和值。</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>d.popitem()</strong></p>
-<hr>
-<h2 id="数据类型的互相转换"><a href="#数据类型的互相转换" class="headerlink" title="数据类型的互相转换"></a>数据类型的互相转换</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 类型间主要通过list来达到转换的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># list和set</span></span><br><span class="line"></span><br><span class="line">s = set(l)</span><br><span class="line"></span><br><span class="line">l = list(s)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和tuple</span></span><br><span class="line"></span><br><span class="line">t = tuple(l)</span><br><span class="line"></span><br><span class="line">l = list(t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># list和dict</span></span><br><span class="line"></span><br><span class="line">d = dict(zip(l1, l2))</span><br><span class="line"></span><br><span class="line">l1 = list(d.keys())</span><br><span class="line"></span><br><span class="line">l2 = list(d.values())</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="内置函数sorted"><a href="#内置函数sorted" class="headerlink" title="内置函数sorted"></a>内置函数sorted</h2><hr>
-<h2 id="collections"><a href="#collections" class="headerlink" title="collections"></a>collections</h2>
           
         
       
