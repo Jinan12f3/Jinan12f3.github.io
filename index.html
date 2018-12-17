@@ -232,6 +232,348 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/17/re/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jinan Qiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/17/re/" itemprop="url">python re(正则表达式)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T18:23:02+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Regular-Expression"><a href="#Regular-Expression" class="headerlink" title="Regular Expression"></a>Regular Expression</h2><h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><table>
+<tbody>
+
+<tr>
+    <td>\</td>
+    <td><p>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\\' 匹配 "\" 而 "\(" 则匹配 "("。</p></td>
+</tr>
+<tr>
+    <td><span id="ts9">^</span></td>
+    <td><p>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。</p></td>
+</tr>
+<tr>
+    <td><span id="ts1">$</span></td>
+    <td><p>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。</p></td>
+</tr>
+<tr>
+    <td><span id="ts3">*</span></td>
+    <td><p>匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。</p></td>
+</tr>
+<tr>
+    <td><span id="ts4">+</span></td>
+    <td><p>匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。</p></td>
+</tr>
+<tr>
+    <td><span id="ts7">?</span></td>
+    <td><p>匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 。? 等价于 {0,1}。</p></td>
+</tr>
+<tr>
+    <td><span id="xd1">{n}</span></td>
+    <td><p>n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。</p></td>
+</tr>
+<tr>
+    <td><span id="xd2">{n,}</span></td>
+    <td><p>n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。</p></td>
+</tr>
+<tr>
+    <td><span id="xd3">{n,m}</span></td>
+    <td><p>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。</p></td>
+</tr>
+<tr>
+    <td>?</td>
+    <td><p>当该字符紧跟在任何一个其他限制符 (\*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。</p></td>
+</tr>
+<tr>
+    <td><span id="ts5">.</span></td>
+    <td><p>匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像"<strong>(.|\n)</strong>"的模式。</p></td>
+</tr>
+<tr>
+    <td>(pattern)</td>
+    <td><p>匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。</p></td>
+</tr>
+<tr>
+    <td>(?:pattern)</td>
+    <td><p>匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。</p></td>
+</tr>
+<tr>
+    <td>(?=pattern)</td>
+    <td><p>正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，"Windows(?=95|98|NT|2000)"能匹配"Windows2000"中的"Windows"，但不能匹配"Windows3.1"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</p></td>
+</tr>
+<tr>
+    <td>(?!pattern)</td>
+    <td><p>正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如"Windows(?!95|98|NT|2000)"能匹配"Windows3.1"中的"Windows"，但不能匹配"Windows2000"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</p></td>
+</tr>
+<tr>
+<td>(?&lt;=pattern)</td>
+<td>反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，"<code>(?&lt;=95|98|NT|2000)Windows</code>"能匹配"<code>2000Windows</code>"中的"<code>Windows</code>"，但不能匹配"<code>3.1Windows</code>"中的"<code>Windows</code>"。</td>
+</tr>
+<tr>
+<td>(?&lt;!pattern)</td>
+<td>反向否定预查，与正向否定预查类似，只是方向相反。例如"<code>(?&lt;!95|98|NT|2000)Windows</code>"能匹配"<code>3.1Windows</code>"中的"<code>Windows</code>"，但不能匹配"<code>2000Windows</code>"中的"<code>Windows</code>"。</td>
+</tr>
+<tr>
+    <td>x|y</td>
+    <td><p>匹配 x 或 y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。</p></td>
+</tr>
+<tr>
+    <td>[xyz]</td>
+    <td><p>字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。</p></td>
+</tr>
+<tr>
+    <td>[^xyz]</td>
+    <td><p>负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。</p></td>
+</tr>
+<tr>
+    <td>[a-z]</td>
+    <td><p>字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。</p></td>
+</tr>
+<tr>
+    <td>[^a-z]</td>
+    <td><p>负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。</p></td>
+</tr>
+<tr>
+    <td>\b</td>
+    <td><p>匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。</p></td>
+</tr>
+<tr>
+    <td>\B</td>
+    <td><p>匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy1">\cx</span></td>
+    <td><p>匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。</p></td>
+</tr>
+<tr>
+    <td>\d</td>
+    <td><p>匹配一个数字字符。等价于 [0-9]。</p></td>
+</tr>
+<tr>
+    <td>\D</td>
+    <td><p>匹配一个非数字字符。等价于 [^0-9]。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy2">\f</span></td>
+    <td><p>匹配一个换页符。等价于 \x0c 和 \cL。</p></td>
+</tr>
+<tr>
+    <td>\n</td>
+    <td><p>匹配一个换行符。等价于 \x0a 和 \cJ。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy4">\r</span></td>
+    <td><p>匹配一个回车符。等价于 \x0d 和 \cM。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy5">\s</span></td>
+    <td><p>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy6">\S</span></td>
+    <td><p>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy7">\t</span></td>
+    <td><p>匹配一个制表符。等价于 \x09 和 \cI。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy8">\v</span></td>
+    <td><p>匹配一个垂直制表符。等价于 \x0b 和 \cK。</p></td>
+</tr>
+<tr>
+    <td>\w</td>
+    <td><p>匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'。</p></td>
+</tr>
+<tr>
+    <td>\W</td>
+    <td><p>匹配非字母、数字、下划线。等价于 '[^A-Za-z0-9_]'。</p></td>
+</tr>
+<tr>
+    <td>\xn</td>
+    <td><p>匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\x41' 匹配 "A"。'\x041' 则等价于 '\x04' &amp; "1"。正则表达式中可以使用 ASCII 编码。</p></td>
+</tr>
+<tr>
+    <td>\num</td>
+    <td><p>匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。</p></td>
+</tr>
+<tr>
+    <td><span id="fdy3">\n</span></td>
+    <td><p>标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。</p></td>
+</tr>
+<tr>
+    <td>\nm</td>
+    <td><p>标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。</p></td>
+</tr>
+<tr>
+    <td>\nml</td>
+    <td><p>如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。</p></td>
+</tr>
+<tr>
+    <td>\un</td>
+    <td><p>匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。</p></td>
+</tr>
+<tr>
+    <td><span id="ts11">|</span></td>
+    <td><p>将两个匹配条件进行逻辑“或”（or）运算。例如正则表达式（him|her）匹配 "It belongs to him" 和 "It belongs to her"， 但是不能匹配 "It belongs to them"。注意：这个元字符不是所有的软件都支持的。  </p></td>
+</tr>
+</tbody></table>
+
+
+<h3 id="字符分类"><a href="#字符分类" class="headerlink" title="字符分类"></a>字符分类</h3><h4 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h4><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
+<h4 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h4><p>非打印字符即一些空白的字符，如制表符(Tab)、回车(Enter)等<br>包括：<a href="#fdy1">\cx</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy2">\f</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy3">\n</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy4">\r</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy5">\s</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy6">\S</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy7">\t</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#fdy8">\v</a></p>
+<h4 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h4><p>在正则中包含特殊含义的字符，若要匹配特殊字符需在字符前加反斜杠 “\\”<br>包括：<a href="#ts1">$</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts2">( )</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts3">*</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts4">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts5">.</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="ts6">[</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts7">?</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts8">\</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts9">^</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts10">{</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts11">|</a></p>
+<table>
+<tbody>
+<tr>
+    <th width="20%">字符</th>
+    <th width="80%">描述</th>
+</tr>
+<tr>
+    <td><span id="ts2">(&nbsp;)</span></td>
+    <td><p>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 \( 和 \)。</p></td>
+</tr>
+<tr>
+    <td><span id="ts6">[</span></td>
+    <td><p>标记一个中括号表达式的开始。要匹配 [，请使用 \[。</p></td>
+</tr>
+<tr>
+    <td><span id="ts8">\</span></td>
+    <td><p>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， 'n' 匹配字符 'n'。'\n' 匹配换行符。序列 '\\' 匹配 "\"，而 '\(' 则匹配 "("。 </p></td>
+</tr>
+<tr>
+    <td><span id="ts10">{</span></td>
+    <td><p>标记限定符表达式的开始。要匹配 {，请使用 \{。</p></td>
+</tr>
+</tbody></table>
+
+<h4 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h4><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。<br>包括：<a href="#ts3">*</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts4">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts7">?</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xd1">{n}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xd2">{n,}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xd3">{n,m}</a></p>
+<p><strong>*、+ 限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。</strong></p>
+<p>exp 1:  &nbsp;&nbsp;&nbsp;&nbsp;”&nbsp;<strong>.*</strong>&nbsp;”&nbsp;,&nbsp;&nbsp;”&nbsp;<strong>.+</strong>&nbsp;”&nbsp;&nbsp;——&nbsp;&nbsp;贪婪模式：匹配尽可能多的字符<br>exp 2:  &nbsp;&nbsp;&nbsp;&nbsp;”&nbsp;<strong>.*?</strong>&nbsp;”&nbsp;,&nbsp;&nbsp;”&nbsp;<strong>.+?</strong>&nbsp;”&nbsp;&nbsp;——&nbsp;&nbsp;非贪婪模式：匹配尽可能少的字符</p>
+<h4 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h4><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。</p>
+<p>包括：<a href="#ts9">^</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ts1">$</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dw1">\b</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dw2">\B</a></p>
+<p>注意：不能将限定符与定位符一起使用。不允许诸如 ^* 之类的表达式。</p>
+<h4 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h4><p>用圆括号分组匹配会使相关的匹配会被缓存，此时可用?:放在第一个选项前来消除这种情况，即(?:expression)。</p>
+<p>?:是其中一个非捕获元，还有其他非捕获元：?=&nbsp;,&nbsp;&nbsp;?!&nbsp;,&nbsp;&nbsp;?&lt;=&nbsp;,&nbsp;&nbsp;?&lt;!</p>
+<ul>
+<li>(?=exp)&nbsp;&nbsp;:  正向肯定预查</li>
+<li>(?!exp)&nbsp;&nbsp;:  正向否定预查</li>
+<li>(?&lt;=exp)&nbsp;&nbsp;:  反向肯定预查</li>
+<li>(?&lt;!exp)&nbsp;&nbsp;:  反向否定预查</li>
+</ul>
+<h4 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h4><p>对一个正则表达式模式或部分模式两边添加圆括号将导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式。每个缓冲区都可以使用 <strong>\n</strong> 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。  </p>
+<p>可以使用非捕获元来重写捕获，忽略对相关匹配的保存。</p>
+<p>example 1: 查找文本中两个相同的相邻单词<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> regex <span class="keyword">as</span> re</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = <span class="string">"Is is the cost of of gasoline going up up"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> re.findall(<span class="string">"\b([a-z]+) \1"</span>, s1, flags=re.I)</span><br><span class="line"></span><br><span class="line">Out: [<span class="string">"Is is"</span>, <span class="string">"of of"</span>, <span class="string">"up up"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>example 2: 匹配所有匹配项<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = <span class="string">u"http://localhost:8080/books/book-1/01.html"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reg = re.compile(<span class="string">"^(\w+):\/\/\w+:(\d+)\/(.*?)/(.*?)/[^\.]+\.\w+$"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> reg.search(s2).groups()  <span class="comment"># reg.match(s2).groups的结果一致，但是match从字符串开始位置查找，速度较快</span></span><br><span class="line"></span><br><span class="line">Out: (<span class="string">u'http'</span>, <span class="string">u'8080'</span>, <span class="string">u'books'</span>, <span class="string">u'book-1'</span>, <span class="string">u'01'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> reg.search(s2).group(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">Out: http://localhost:<span class="number">8080</span>/books/book<span class="number">-1</span>/<span class="number">01.</span>html</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> reg.search(s2).group(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">Out: <span class="string">u'8080'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> reg.findall(s2)</span><br><span class="line"></span><br><span class="line">Out: [(<span class="string">u'http'</span>, <span class="string">u'8080'</span>, <span class="string">u'books'</span>, <span class="string">u'book-1'</span>, <span class="string">u'01'</span>)]</span><br></pre></td></tr></table></figure></p>
+<h3 id="Python正则使用"><a href="#Python正则使用" class="headerlink" title="Python正则使用"></a>Python正则使用</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://jinan12f3.github.io/2018/12/12/data_strutures_4py/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -432,7 +774,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/11/huawei_pq/" itemprop="url">12.11 华为笔试题(python)</a></h1>
+                <a class="post-title-link" href="/2018/12/11/huawei_pq/" itemprop="url">12.11 hw笔试题(python)</a></h1>
         
 
         <div class="post-meta">
@@ -1110,7 +1452,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
